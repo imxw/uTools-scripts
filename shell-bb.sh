@@ -1,0 +1,1 @@
+curl -s -X POST "https://AppId前八位.api.lncldglobal.com/1.1/classes/content"  --header "Content-Type: application/json" --header "X-LC-Id: ${AppID}" --header "X-LC-Key: ${masterKey},master" -d "{ \"content\": \"{{subinput}}\" }"
