@@ -25,15 +25,19 @@ import json
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
+
+appId = '' # 填入AppID
+masterKey = '' # 填入MasterKey
 data = {"content": "{{subinput}}"}
 
 headers = {
     'Content-Type': 'application/json',
-    'X-LC-Id': '',   # 填入AppID
-    'X-LC-Key': ',master' # 逗号前填入masterKey
+    'X-LC-Id': appId,   
+    'X-LC-Key': '{},master'.format(masterKey)
 }
 
-url = 'https://AppID前八位.api.lncldglobal.com/1.1/classes/content'
+# 以下链接只使用于国际版，国内域名会不一样，需要去设置页面找一下
+url = 'https://{}.api.lncldglobal.com/1.1/classes/content'.format(appId[:8])
 
 http = urllib3.PoolManager(timeout = 3)
 
@@ -62,6 +66,7 @@ import hashlib
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 data = {"content": "{{subinput}}"}
+appId = '' # 填入AppID
 masterKey = ''   # 填入masterKey
 timestamp = int(round(time.time() * 1000))
 
@@ -71,11 +76,12 @@ sign = hashlib.md5(ret.encode('utf-8')).hexdigest()
 
 headers = {
     'Content-Type': 'application/json',
-    'X-LC-Id': '', # 填入AppID
+    'X-LC-Id': appId,
     'X-LC-Sign': "{},{},master".format(sign,timestamp)
 }
 
-url = 'https://填入AppID前八位.api.lncldglobal.com/1.1/classes/content'
+# 以下链接只使用于国际版，国内域名会不一样，需要去设置页面找一下
+url = 'https://{}.api.lncldglobal.com/1.1/classes/content'.format(appId[:8])
 
 http = urllib3.PoolManager(timeout = 3)
 
